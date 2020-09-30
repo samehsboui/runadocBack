@@ -1,0 +1,7 @@
+.idea/
+# dependencies
+/target/*
+
+#docker volumes
+/tools/docker/volumes/
+/target/
