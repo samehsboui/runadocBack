@@ -3,6 +3,8 @@ package com.app.runadoc.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,4 +30,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query(value = "SELECT * FROM users WHERE id != :id", nativeQuery = true)
 	public List<User> findAllWithoutConnectedUser(@Param("id") Long id);
+	
+	@Query("select u from User u where u.username like :x")
+	public Page<User> chercher(@Param("x") String mc,Pageable pageable); 
+	
 }

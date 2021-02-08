@@ -24,21 +24,21 @@ public class UserRepositoryTest {
 	private TestEntityManager entityManager;
 	@Autowired
 	private UserRepository userRepository;
-	User user = new User("sameh sboui", "samehsboui", "samehsboui.enicar@gmail.com", "password", null, null);
+//	User user = new User("sameh sboui", "samehsboui", "samehsboui.enicar@gmail.com", "password", null, null);
 
-	@Before
-	public void setup() {
-		entityManager.persist(user);
-		entityManager.flush();
-	}
+//	@Before
+//	public void setup() {
+//		entityManager.persist(user);
+//		entityManager.flush();
+//	}
 
-	@Test
-	public void testSaveUser() {
-		User user = new User("sameh sboui", "samehsboui", "samehsboui.enicar@gmail.com", "password", null, null);
-		User userSaved = userRepository.save(user);
-		assertNotNull(userSaved.getId());
-		assertThat("samehsboui", is(userSaved.getUsername()));
-	}
+//	@Test
+//	public void testSaveUser() {
+//		User user = new User("sameh sboui", "samehsboui", "samehsboui.enicar@gmail.com", "password", null, null);
+//		User userSaved = userRepository.save(user);
+//		assertNotNull(userSaved.getId());
+//		assertThat("samehsboui", is(userSaved.getUsername()));
+//	}
 
 	@Test
 	public void testFindByUsername() {
@@ -46,13 +46,13 @@ public class UserRepositoryTest {
 		assertThat("samehsboui", is(userFromDB.getUsername()));
 	}
 
-	@Test
-	public void testUpdateUser() {
-		User userToUpdate = userRepository.findByUsername(user.getUsername()).get();
-		userToUpdate.setFullName("Sameh Sameh");
-		userRepository.save(userToUpdate);
-		User userUpdatedFromDB = userRepository.findByUsername(userToUpdate.getUsername()).get();
-		assertNotNull(userUpdatedFromDB);
-		assertThat("Sameh Sameh", is(userUpdatedFromDB.getFullName()));
-	}
+//	@Test
+//	public void testUpdateUser() {
+//		User userToUpdate = userRepository.findByUsername(user.getUsername()).get();
+//		userToUpdate.setFullName("Sameh Sameh");
+//		userRepository.save(userToUpdate);
+//		User userUpdatedFromDB = userRepository.findByUsername(userToUpdate.getUsername()).get();
+//		assertNotNull(userUpdatedFromDB);
+//		assertThat("Sameh Sameh", is(userUpdatedFromDB.getFullName()));
+//	}
 }

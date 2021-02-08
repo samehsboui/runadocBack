@@ -80,7 +80,7 @@ public class AuthentificationController {
 		stringBufferFullName.append(signUpRequest.getLastName());
 		String fullName = stringBufferFullName.toString();
 		User user = new User(fullName, signUpRequest.getUsername(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()), new Date(), new Date());
+				encoder.encode(signUpRequest.getPassword()), new Date(), null, null, null, new Date(),null,null,null,null);
 
 		Set<Role> roles = new HashSet<>();
 		roles.add(roleRepository.findByName(RoleName.valueOf("ROLE_USER")).get());

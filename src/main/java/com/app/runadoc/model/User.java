@@ -53,6 +53,14 @@ public class User {
 	@CreationTimestamp
 	private Date createdAt;
 
+	private String address;
+	
+
+	
+	private String specialty;
+	
+	private String tel;
+
 	@Column(name = "updated_at", nullable = false)
 	@UpdateTimestamp
 	private Date updatedAt;
@@ -64,20 +72,15 @@ public class User {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_etablissements", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "etablissement_id"))
+	private Set<Etablissement> etablissements = new HashSet<>();
 
 	@OneToMany(targetEntity = RendezVous.class, mappedBy = "id", orphanRemoval = false, fetch = FetchType.LAZY)
 	private Set<RendezVous> rendezvous;
 
 	public User() {
-	}
-
-	public User(String fullName, String username, String email, String password, Date createdAt, Date updatedAt) {
-		this.fullName = fullName;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 	}
 
 	public Long getId() {
@@ -120,20 +123,36 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getSpecialty() {
+		return specialty;
+	}
+
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	public Date getUpdatedAt() {
@@ -151,5 +170,55 @@ public class User {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Set<Etablissement> getEtablissements() {
+		return etablissements;
+	}
+
+	public void setEtablissements(Set<Etablissement> etablissements) {
+		this.etablissements = etablissements;
+	}
+
+	public Set<RendezVous> getRendezvous() {
+		return rendezvous;
+	}
+
+	public void setRendezvous(Set<RendezVous> rendezvous) {
+		this.rendezvous = rendezvous;
+	}
+
+	public User(@NotBlank @Size(min = 3, max = 50) String fullName, @NotBlank @Size(min = 3, max = 50) String username,
+			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password,
+			Date createdAt, String address, String specialty, String tel, Date updatedAt, byte[] image, Set<Role> roles,
+			Set<Etablissement> etablissements, Set<RendezVous> rendezvous) {
+		super();
+		this.fullName = fullName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.createdAt = createdAt;
+		this.address = address;
+		this.specialty = specialty;
+		this.tel = tel;
+		this.updatedAt = updatedAt;
+		this.image = image;
+		this.roles = roles;
+		this.etablissements = etablissements;
+		this.rendezvous = rendezvous;
+	}
+	
+	
+	
+
+
+
 
 }
